@@ -27,6 +27,7 @@ public class Cliente implements Serializable {
     private Endereco endereco;
     private String email;
     private String telefone;
+    private String bandeira;
     private TipoCliente tipo = TipoCliente.COMUM;
 
     @Transient
@@ -118,6 +119,18 @@ public class Cliente implements Serializable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getBandeira() {
+        return bandeira;
+    }
+
+    public void setBandeira(String bandeira) {
+        this.bandeira = bandeira;
     }
 
     @Override
