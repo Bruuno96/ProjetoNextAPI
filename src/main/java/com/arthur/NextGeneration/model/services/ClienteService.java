@@ -92,20 +92,38 @@ ClienteService {
         if(cliente != null){
 
             // Cria cartao de credito estatico
-            CartaoCredito cartaoCredito = new CartaoCredito("visa","1234",new Date());
+           if(cliente.getBandeira().equals("VISA")){
+               CartaoCredito cartaoCredito = new CartaoCredito("visa","1234",new Date());
 
-              // Cria cartao de debito estatico
-            CartaoDebito cartaoDebito = new CartaoDebito("mastercard","1234",1500.0);
-
-//            // Cria conta ao criar cliente
-            Conta conta = new Conta(0.0,"1234",cliente,TipoConta.CORRENTE,cartaoCredito,cartaoDebito,0.0,new Date());
+               // Cria cartao de debito estatico
+               CartaoDebito cartaoDebito = new CartaoDebito("visa","1234",1500.0);
+               // Cria conta ao criar cliente
+               Conta conta = new Conta(0.0,"1234",cliente,TipoConta.CORRENTE,cartaoCredito,cartaoDebito,0.0,new Date());
 
 //            // Cria pix ao criar cliente
-            Pix pix = new Pix();
-            pix.ativarChave(TipoChavePix.CPF, conta.getCliente().getCpf());
-            pix.setConta(conta);
+               Pix pix = new Pix();
+               pix.ativarChave(TipoChavePix.CPF, conta.getCliente().getCpf());
+               pix.setConta(conta);
 
-            pixRepository.save(pix);
+               pixRepository.save(pix);
+
+           }else{
+               CartaoCredito cartaoCredito = new CartaoCredito("mastercard","1234",new Date());
+
+               // Cria cartao de debito estatico
+               CartaoDebito cartaoDebito = new CartaoDebito("mastercard","1234",1500.0);
+               // Cria conta ao criar cliente
+               Conta conta = new Conta(0.0,"1234",cliente,TipoConta.CORRENTE,cartaoCredito,cartaoDebito,0.0,new Date());
+
+//            // Cria pix ao criar cliente
+               Pix pix = new Pix();
+               pix.ativarChave(TipoChavePix.CPF, conta.getCliente().getCpf());
+               pix.setConta(conta);
+
+               pixRepository.save(pix);
+
+           }
+//
 
             return true;
         }
